@@ -108,6 +108,18 @@ nome
         ORDER BY degrees.name;
 
 -Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
+SELECT DISTINCT teachers.surname AS 'cognome_prof/prof.ssa', teachers.name AS 'nome_prof/prof.ssa', departments.name
+    FROM teachers
+        JOIN course_teacher
+            ON course_teacher.teacher_id = teachers.id
+        JOIN courses
+            ON courses.id = course_teacher.course_id
+        JOIN degrees
+            ON degrees.id = courses.degree_id
+        JOIN departments
+            ON departments.id = degrees.department_id
+        WHERE departments.name = 'Dipartimento di Matematica'
+        ORDER BY teachers.surname;
 
 BONUS
 -Selezionare per ogni studente il numero di tentativi sostenuti
